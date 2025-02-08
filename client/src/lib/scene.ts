@@ -8,7 +8,6 @@ export function initScene(canvas: HTMLCanvasElement) {
     0.1,
     1000
   );
-
   const renderer = new THREE.WebGLRenderer({
     canvas,
     antialias: true,
@@ -18,33 +17,22 @@ export function initScene(canvas: HTMLCanvasElement) {
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-  // Create more intense particle system
+  // Create particles
   const particlesGeometry = new THREE.BufferGeometry();
-  const particlesCount = 5000; // Increased particle count
+  const particlesCount = 2000;
   const posArray = new Float32Array(particlesCount * 3);
-  const colorsArray = new Float32Array(particlesCount * 3);
 
-  for(let i = 0; i < particlesCount * 3; i += 3) {
-    // Create a more dramatic spread of particles
-    posArray[i] = (Math.random() - 0.5) * 15;
-    posArray[i + 1] = (Math.random() - 0.5) * 15;
-    posArray[i + 2] = (Math.random() - 0.5) * 15;
-
-    // Add varying colors
-    colorsArray[i] = Math.random() * 0.5 + 0.5; // R
-    colorsArray[i + 1] = Math.random() * 0.3; // G
-    colorsArray[i + 2] = Math.random() * 0.5 + 0.5; // B
+  for(let i = 0; i < particlesCount * 3; i++) {
+    posArray[i] = (Math.random() - 0.5) * 10;
   }
 
   particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-  particlesGeometry.setAttribute('color', new THREE.BufferAttribute(colorsArray, 3));
 
   const particlesMaterial = new THREE.PointsMaterial({
-    size: 0.01,
-    vertexColors: true,
+    size: 0.005,
+    color: 0x3498db,
     transparent: true,
     opacity: 0.8,
-    blending: THREE.AdditiveBlending,
   });
 
   const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
@@ -54,8 +42,6 @@ export function initScene(canvas: HTMLCanvasElement) {
 
   let mouseX = 0;
   let mouseY = 0;
-  let targetX = 0;
-  let targetY = 0;
 
   function onMouseMove(event: MouseEvent) {
     mouseX = (event.clientX / window.innerWidth) * 2 - 1;
@@ -72,33 +58,15 @@ export function initScene(canvas: HTMLCanvasElement) {
 
   window.addEventListener("resize", handleResize);
 
-  let frame = 0;
   function animate() {
     requestAnimationFrame(animate);
-    frame++;
 
-    // Smooth mouse movement
-    targetX += (mouseX - targetX) * 0.1;
-    targetY += (mouseY - targetY) * 0.1;
+    particlesMesh.rotation.y += 0.001;
+    particlesMesh.rotation.x += 0.0005;
 
-    // Dynamic particle movement
-    particlesMesh.rotation.y += 0.002;
-    particlesMesh.rotation.x += 0.001;
-
-    // Wave effect
-    const positions = particlesGeometry.attributes.position.array as Float32Array;
-    for(let i = 0; i < positions.length; i += 3) {
-      const x = positions[i];
-      const y = positions[i + 1];
-      const z = positions[i + 2];
-
-      positions[i + 1] = y + Math.sin((frame + x * 10) * 0.002) * 0.02;
-    }
-    particlesGeometry.attributes.position.needsUpdate = true;
-
-    // Interactive rotation based on mouse
-    particlesMesh.rotation.x += targetY * 0.002;
-    particlesMesh.rotation.y += targetX * 0.002;
+    // Subtle mouse interaction
+    particlesMesh.rotation.x += mouseY * 0.0003;
+    particlesMesh.rotation.y += mouseX * 0.0003;
 
     renderer.render(scene, camera);
   }
