@@ -2,6 +2,9 @@ import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { motion } from "framer-motion";
 import { initScene } from "@/lib/scene";
+import { FaHtml5, FaCss3Alt, FaReact, FaNodeJs } from "react-icons/fa";
+import { SiTailwindcss, SiExpress, SiFramer } from "react-icons/si";
+import { RiJavascriptFill } from "react-icons/ri";
 
 export default function Hero() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -11,6 +14,17 @@ export default function Hero() {
     const { cleanup } = initScene(canvasRef.current);
     return cleanup;
   }, []);
+
+  const skills = [
+    { icon: <FaHtml5 className="text-[#E34F26]" />, name: "HTML" },
+    { icon: <FaCss3Alt className="text-[#1572B6]" />, name: "CSS" },
+    { icon: <SiTailwindcss className="text-[#06B6D4]" />, name: "Tailwind" },
+    { icon: <RiJavascriptFill className="text-[#F7DF1E]" />, name: "JavaScript" },
+    { icon: <FaReact className="text-[#61DAFB]" />, name: "React" },
+    { icon: <FaNodeJs className="text-[#339933]" />, name: "Node.js" },
+    { icon: <SiExpress className="text-[#000000]" />, name: "Express" },
+    { icon: <SiFramer className="text-[#0055FF]" />, name: "Framer Motion" },
+  ];
 
   return (
     <section className="relative h-screen flex items-center justify-center overflow-hidden">
@@ -26,11 +40,26 @@ export default function Hero() {
           className="flex-1 text-center md:text-left"
         >
           <h1 className="text-5xl md:text-7xl font-playfair font-bold mb-6 text-foreground">
-            Creative Developer
+            Hi, I'm <span className="text-primary">TAHMID</span>
           </h1>
           <p className="text-xl md:text-2xl mb-8 text-muted-foreground max-w-2xl">
-            Crafting beautiful digital experiences through code and creativity
+            Full Stack Web Developer passionate about creating interactive digital experiences
           </p>
+          <div className="flex flex-wrap gap-4 justify-center md:justify-start mb-8">
+            {skills.map((skill, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                className="flex items-center gap-2 bg-white/10 backdrop-blur-sm 
+                         px-4 py-2 rounded-full border border-primary/20"
+              >
+                <span className="text-2xl">{skill.icon}</span>
+                <span className="text-sm font-medium text-foreground">{skill.name}</span>
+              </motion.div>
+            ))}
+          </div>
           <motion.a
             href="#projects"
             whileHover={{ scale: 1.05 }}
@@ -51,8 +80,8 @@ export default function Hero() {
           <div className="relative w-64 h-64 md:w-80 md:h-80 mx-auto">
             <div className="absolute inset-0 bg-primary/20 rounded-full animate-pulse"></div>
             <img
-              src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=800"
-              alt="Profile"
+              src="/attached_assets/img tahmid.jpg"
+              alt="TAHMID"
               className="w-full h-full object-cover rounded-full border-4 border-primary shadow-xl"
             />
           </div>
