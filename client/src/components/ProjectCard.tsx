@@ -26,15 +26,15 @@ export default function ProjectCard({ title, description, image, tags }: Project
           />
         </div>
         <CardHeader className="p-4">
-          <h3 className="text-xl font-playfair font-bold text-[#2C3E50]">{title}</h3>
+          <h3 className="text-xl font-playfair font-bold text-foreground">{title}</h3>
         </CardHeader>
         <CardContent className="p-4 pt-0">
-          <p className="text-[#34495E] mb-4">{description}</p>
+          <p className="text-muted-foreground mb-4">{description}</p>
           <div className="flex flex-wrap gap-2">
             {tags.map((tag) => (
               <span
                 key={tag}
-                className="px-3 py-1 bg-[#3498DB]/10 text-[#3498DB] rounded-full text-sm"
+                className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm"
               >
                 {tag}
               </span>

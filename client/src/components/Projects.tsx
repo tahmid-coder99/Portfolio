@@ -23,9 +23,9 @@ export default function Projects() {
   ];
 
   return (
-    <section id="projects" className="py-20 bg-[#ECF0F1]">
+    <section id="projects" className="py-20 bg-background">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-playfair font-bold text-center mb-12 text-[#2C3E50]">
+        <h2 className="text-4xl font-playfair font-bold text-center mb-12 text-foreground">
           Featured Projects
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

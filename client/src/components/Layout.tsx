@@ -1,8 +1,11 @@
 import Navbar from "./Navbar";
+import { useTheme } from "@/hooks/use-theme";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
+  const { theme } = useTheme();
+
   return (
-    <div className="min-h-screen bg-[#ECF0F1] font-poppins text-[#34495E]">
+    <div className={`${theme} min-h-screen bg-background font-poppins text-foreground`}>
       <Navbar />
       {children}
     </div>
