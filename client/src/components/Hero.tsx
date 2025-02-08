@@ -15,17 +15,6 @@ export default function Hero() {
     return cleanup;
   }, []);
 
-  const skills = [
-    { icon: <FaHtml5 className="text-[#E34F26]" />, name: "HTML" },
-    { icon: <FaCss3Alt className="text-[#1572B6]" />, name: "CSS" },
-    { icon: <SiTailwindcss className="text-[#06B6D4]" />, name: "Tailwind" },
-    { icon: <RiJavascriptFill className="text-[#F7DF1E]" />, name: "JavaScript" },
-    { icon: <FaReact className="text-[#61DAFB]" />, name: "React" },
-    { icon: <FaNodeJs className="text-[#339933]" />, name: "Node.js" },
-    { icon: <SiExpress className="text-black" />, name: "Express" },
-    { icon: <SiFramer className="text-[#0055FF]" />, name: "Framer Motion" },
-  ];
-
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -49,13 +38,13 @@ export default function Hero() {
         className="absolute top-0 left-0 w-full h-full -z-10 opacity-50"
       />
       <div className="container mx-auto px-4 flex flex-col md:flex-row items-center gap-12">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
           className="flex-1 text-center md:text-left"
         >
-          <motion.h1 
+          <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
@@ -63,32 +52,21 @@ export default function Hero() {
           >
             Hi, I'm <span className="text-primary">TAHMID</span>
           </motion.h1>
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
             className="text-lg sm:text-xl md:text-2xl mb-8 text-muted-foreground max-w-2xl"
           >
-            Full Stack Web Developer passionate about creating interactive digital experiences
+            Full Stack Web Developer passionate about creating interactive
+            digital experiences
           </motion.p>
           <motion.div
             variants={containerVariants}
             initial="hidden"
             animate="visible"
             className="flex flex-wrap gap-4 justify-center md:justify-start mb-8"
-          >
-            {skills.map((skill, index) => (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-                className="flex items-center gap-2 bg-white/10 backdrop-blur-sm 
-                         px-4 py-2 rounded-full border border-primary/20"
-              >
-                <span className="text-2xl">{skill.icon}</span>
-                <span className="text-sm font-medium text-foreground">{skill.name}</span>
-              </motion.div>
-            ))}
-          </motion.div>
+          ></motion.div>
           <motion.a
             href="#projects"
             initial={{ opacity: 0, y: 20 }}
@@ -103,7 +81,7 @@ export default function Hero() {
           </motion.a>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
@@ -116,7 +94,8 @@ export default function Hero() {
               alt="TAHMID"
               className="w-full h-full object-cover rounded-full border-4 border-primary shadow-xl"
               onError={(e) => {
-                e.currentTarget.src = "https://images.unsplash.com/photo-1633332755192-727a05c4013d?auto=format&fit=crop&q=80&w=880";
+                e.currentTarget.src =
+                  "https://images.unsplash.com/photo-1633332755192-727a05c4013d?auto=format&fit=crop&q=80&w=880";
               }}
             />
           </div>
