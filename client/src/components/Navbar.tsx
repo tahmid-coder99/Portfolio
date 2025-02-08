@@ -1,11 +1,7 @@
 import { Link } from "wouter";
 import { motion } from "framer-motion";
-import { Moon, Sun } from "lucide-react";
-import { useTheme } from "@/hooks/use-theme";
 
 export default function Navbar() {
-  const { theme, toggleTheme } = useTheme();
-
   const links = [
     { href: "#about", label: "About" },
     { href: "#projects", label: "Projects" },
@@ -34,40 +30,30 @@ export default function Navbar() {
       initial="hidden"
       animate="show"
       variants={navAnimation}
-      className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border"
+      className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-[#E5E7EB]"
     >
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
         <Link href="/">
           <motion.a
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="text-2xl font-playfair font-bold text-foreground"
+            className="text-2xl font-playfair font-bold text-[#2C3E50]"
           >
             Portfolio
           </motion.a>
         </Link>
-        <div className="flex items-center gap-8">
-          <div className="hidden md:flex gap-8">
-            {links.map((link) => (
-              <motion.a
-                key={link.href}
-                href={link.href}
-                variants={itemAnimation}
-                whileHover={{ y: -2, color: "hsl(var(--primary))" }}
-                className="text-foreground/80 hover:text-primary transition-colors"
-              >
-                {link.label}
-              </motion.a>
-            ))}
-          </div>
-          <motion.button
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            onClick={toggleTheme}
-            className="p-2 rounded-full bg-primary/10 text-primary hover:bg-primary/20 transition-colors"
-          >
-            {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
-          </motion.button>
+        <div className="hidden md:flex gap-8">
+          {links.map((link) => (
+            <motion.a
+              key={link.href}
+              href={link.href}
+              variants={itemAnimation}
+              whileHover={{ y: -2, color: "#3498DB" }}
+              className="text-[#34495E]/80 hover:text-[#3498DB] transition-colors"
+            >
+              {link.label}
+            </motion.a>
+          ))}
         </div>
       </div>
     </motion.nav>
