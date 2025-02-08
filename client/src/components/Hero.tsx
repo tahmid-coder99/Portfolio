@@ -22,36 +22,65 @@ export default function Hero() {
     { icon: <RiJavascriptFill className="text-[#F7DF1E]" />, name: "JavaScript" },
     { icon: <FaReact className="text-[#61DAFB]" />, name: "React" },
     { icon: <FaNodeJs className="text-[#339933]" />, name: "Node.js" },
-    { icon: <SiExpress className="text-[#000000]" />, name: "Express" },
+    { icon: <SiExpress className="text-black" />, name: "Express" },
     { icon: <SiFramer className="text-[#0055FF]" />, name: "Framer Motion" },
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.3,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 },
+  };
+
   return (
-    <section className="relative h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden py-20 md:py-0">
       <canvas
         ref={canvasRef}
-        className="absolute top-0 left-0 w-full h-full -z-10"
+        className="absolute top-0 left-0 w-full h-full -z-10 opacity-50"
       />
-      <div className="container mx-auto px-4 flex flex-col md:flex-row items-center gap-8">
+      <div className="container mx-auto px-4 flex flex-col md:flex-row items-center gap-12">
         <motion.div 
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
           className="flex-1 text-center md:text-left"
         >
-          <h1 className="text-5xl md:text-7xl font-playfair font-bold mb-6 text-foreground">
+          <motion.h1 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="text-4xl sm:text-5xl md:text-7xl font-playfair font-bold mb-6 text-foreground"
+          >
             Hi, I'm <span className="text-primary">TAHMID</span>
-          </h1>
-          <p className="text-xl md:text-2xl mb-8 text-muted-foreground max-w-2xl">
+          </motion.h1>
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            className="text-lg sm:text-xl md:text-2xl mb-8 text-muted-foreground max-w-2xl"
+          >
             Full Stack Web Developer passionate about creating interactive digital experiences
-          </p>
-          <div className="flex flex-wrap gap-4 justify-center md:justify-start mb-8">
+          </motion.p>
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="flex flex-wrap gap-4 justify-center md:justify-start mb-8"
+          >
             {skills.map((skill, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
+                variants={itemVariants}
                 className="flex items-center gap-2 bg-white/10 backdrop-blur-sm 
                          px-4 py-2 rounded-full border border-primary/20"
               >
@@ -59,13 +88,16 @@ export default function Hero() {
                 <span className="text-sm font-medium text-foreground">{skill.name}</span>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
           <motion.a
             href="#projects"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="inline-block bg-primary text-primary-foreground px-8 py-3 rounded-lg
-                     hover:bg-primary/90 transition-colors duration-300"
+                     hover:bg-primary/90 transition-colors duration-300 mb-8 md:mb-0"
           >
             View My Work
           </motion.a>
@@ -83,6 +115,9 @@ export default function Hero() {
               src="/attached_assets/img tahmid.jpg"
               alt="TAHMID"
               className="w-full h-full object-cover rounded-full border-4 border-primary shadow-xl"
+              onError={(e) => {
+                e.currentTarget.src = "https://images.unsplash.com/photo-1633332755192-727a05c4013d?auto=format&fit=crop&q=80&w=880";
+              }}
             />
           </div>
         </motion.div>
